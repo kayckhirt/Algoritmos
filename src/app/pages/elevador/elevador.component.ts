@@ -9,7 +9,6 @@ export class ElevadorComponent {
   andarAlvo: number = 1;
   selecaoAndares: any = [];
   portaAberta: boolean = false;
-  sentidoDoElevador: number = 0;
   intervalo: any;
   constructor() {
     this.ligarElevador()
@@ -26,7 +25,7 @@ export class ElevadorComponent {
         this.andarAlvo = 1;
         this.ligarElevador();
       }
-    }, 8000);
+    }, 16000);
   }
 
 
@@ -39,7 +38,7 @@ export class ElevadorComponent {
     } else {
       funcionando = true;
     }
-    await this.sleep(1000)
+    await this.sleep(3000)
     if (this.andarAtual < this.andarAlvo) {
       this.andarAtual = this.andarAtual + 1
     }

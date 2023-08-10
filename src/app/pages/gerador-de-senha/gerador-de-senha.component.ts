@@ -12,6 +12,7 @@ export class GeradorDeSenhaComponent {
   senha: string = '';
   copiado: boolean = false;
   senhaboa: string = '';
+  forcaSenha:number = 0;
 
   checkboxes: {
     label: string,
@@ -84,25 +85,26 @@ export class GeradorDeSenhaComponent {
   }
 
   forcaDaSenha() {
-    if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()]).{8,}$/.test(this.senha)) {
+    this.forcaSenha = 0;
+    console.log(this.senha)
+    this.checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {   
+        this.forcaSenha ++;
+      }
+    });
+    if (this.forcaSenha === 5 && this.senha.length >= 8){
       this.senhaboa = 'Senha Muito Forte!'
     }
-    if (/(?=^.{7,}$)((?=.*\d)(?=.*\W+))(?![.\n]).*$/.test(this.senha)) {
+    else if(this.forcaSenha === 4 && this.senha.length >= 8){
       this.senhaboa = 'Senha Forte!'
     }
-    if (/^(?=.*\d)(?=.*[!@#$%^&*+-]).{6,}$/.test(this.senha)) {
+    else if(this.forcaSenha == 3 && this.senha.length >= 6){
       this.senhaboa = 'Senha Mediana'
     }
-    if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(this.senha)) {
-      this.senhaboa = 'Senha Mediana'
-    }
-    if (/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(this.senha)) {
+    else if(this.forcaSenha == 2 && this.senha.length <= 6){
       this.senhaboa = 'Senha Fraca'
     }
-    if (/^(?=.*[a-z])(?=.*[!@#$%^&*+-]).{6,}$/.test(this.senha)) {
-      this.senhaboa = 'Senha Fraca'
-    }
-    if (/^(?=.*[a-z])(?=.*\d).{6,}$/.test(this.senha)) {
+    else {
       this.senhaboa = 'Senha Fraca'
     }
   }
