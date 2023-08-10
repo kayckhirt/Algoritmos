@@ -32,13 +32,9 @@ export class ElevadorComponent {
 
   async ligarElevador() {
   let funcionando = true
-  console.log("Ligando...")
   while (funcionando) {
-    console.log(`Andar atual: ${this.andarAtual};
-      Andar Alvo: ${this.andarAlvo}`)
     if (this.selecaoAndares.length === 0 && this.andarAtual === this.andarAlvo) {
       funcionando = false;
-      console.log('ta funcionando? ' + funcionando)
       this.reset()
     } else {
       funcionando = true;
@@ -106,7 +102,6 @@ definirAndar(andar: number) {
     } else {
       this.selecaoAndares.push(andar);
     }
-    console.log(`Andar definido para ${andar}`);
   }
   this.ligarElevador()
 }
@@ -121,10 +116,6 @@ SomChegando() {
 abrirPorta() {
   this.portaAberta = true
   this.SomChegando()
-}
-
-voltarInicio() {
-  this.andarAlvo = 1;
 }
 
 }
