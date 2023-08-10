@@ -108,7 +108,7 @@ definirAndar(andar: number) {
 
 SomChegando() {
   let audio = new Audio();
-  audio.src = "../../assets/som-de-elevador.mp4";
+  audio.src = "assets/som-de-elevador.mp4";
   audio.load();
   audio.play();
 }
