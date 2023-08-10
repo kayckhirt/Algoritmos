@@ -18,11 +18,12 @@ export class ElevadorComponent {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  reset(){
+  reset() {
     clearInterval(this.intervalo);
     this.intervalo = setInterval(() => {
       if (this.selecaoAndares.length === 0 && this.andarAtual !== 1) {
         this.andarAlvo = 1;
+        this.portaAberta =false;
         this.ligarElevador();
       }
     }, 16000);
@@ -30,91 +31,96 @@ export class ElevadorComponent {
 
 
   async ligarElevador() {
-  let funcionando = true
-  while (funcionando) {
-    if (this.selecaoAndares.length === 0 && this.andarAtual === this.andarAlvo) {
-      funcionando = false;
-      this.reset()
-    } else {
-      funcionando = true;
-    }
-    await this.sleep(3000)
-    if (this.andarAtual < this.andarAlvo) {
-      this.andarAtual = this.andarAtual + 1
-    }
-    if (this.andarAtual > this.andarAlvo) {
-      this.andarAtual = this.andarAtual - 1;
-    }
-    if (this.andarAtual === this.andarAlvo &&
-      this.selecaoAndares.length > 0) {
+    let funcionando = true
+    while (funcionando) {
+      console.log(`Andar atual: ${this.andarAtual};
+      Andar Alvo: ${this.andarAlvo}`)
+      if (this.selecaoAndares.length === 0 && this.andarAtual === this.andarAlvo) {
+        funcionando = false;
+        this.reset()
+      } else {
+        funcionando = true;
+      }
+      await this.sleep(3000)
+      if (this.andarAtual < this.andarAlvo) {
+        this.andarAtual = this.andarAtual + 1
+      }
+      if (this.andarAtual > this.andarAlvo) {
+        this.andarAtual = this.andarAtual - 1;
+      }
+      if (this.andarAtual === this.andarAlvo &&
+        this.selecaoAndares.length > 0) {
         this.andarAlvo = this.selecaoAndares.shift()
       }
-  }
-  this.abrirPorta()
-}
-
-chamarParaCima(andar: number): any {
-  if (this.andarAtual === andar) {
+    }
     this.abrirPorta()
   }
+
+ chamarParaCima(andar: number): any {
+  if (this.andarAtual === andar) {
+    this.abrirPorta();
+    this.andarAtual = andar; 
+  }
   if (this.selecaoAndares.length === 0) {
-    this.andarAlvo = andar
-    return this.ligarElevador()
+    this.andarAlvo = andar;
+    return this.ligarElevador();
   }
   if (this.andarAlvo < andar) {
     this.andarAlvo = andar;
   } else {
     this.selecaoAndares.push(andar);
   }
-  if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
-    return this.ligarElevador()
+    if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
+      return this.ligarElevador()
+    }
   }
-}
 
-chamarParaBaixo(andar: number): any {
-  if (this.andarAtual == andar) {
-    this.abrirPorta()
-  }
-  if (this.selecaoAndares.length === 0) {
-    this.andarAlvo = andar
-    return this.ligarElevador()
-  }
-  if (this.andarAlvo > andar) {
-    this.andarAlvo = andar;
-  } else {
-    this.selecaoAndares.push(andar);
-  }
-  if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
-    return this.ligarElevador()
-  }
-}
-
-definirAndar(andar: number) {
-  if (this.andarAtual === andar) {
-  }
-  if (andar >= 1) {
+  chamarParaBaixo(andar: number): any {
+    if (this.andarAtual == andar) {
+      this.abrirPorta()
+    }
     if (this.selecaoAndares.length === 0) {
       this.selecaoAndares.push(andar);
       this.andarAlvo = this.selecaoAndares[0];
-      this.ligarElevador();
-      this.portaAberta = false;
+      return this.ligarElevador()
+    }
+    if (this.andarAlvo > andar) {
+      this.andarAlvo = andar;
     } else {
       this.selecaoAndares.push(andar);
     }
+    if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
+      return this.ligarElevador()
+    }
   }
-  this.ligarElevador()
-}
 
-SomChegando() {
-  let audio = new Audio();
-  audio.src = "assets/som-de-elevador.mp4";
-  audio.load();
-  audio.play();
-}
+  definirAndar(andar: number) {
+    if (this.andarAtual === andar) {
+    }
+    if (andar >= 1) {
+      if (this.selecaoAndares.length === 0) {
+        this.selecaoAndares.push(andar);
+        this.andarAlvo = this.selecaoAndares[0];
+        this.ligarElevador();
+        this.portaAberta = false;
+      } else {
+        this.selecaoAndares.push(andar);
+      }
+      console.log(`Andar definido para ${andar}`);
+    }
+    this.ligarElevador()
+  }
 
-abrirPorta() {
-  this.portaAberta = true
-  this.SomChegando()
-}
+  SomChegando() {
+    let audio = new Audio();
+    audio.src = "assets/som-de-elevador.mp4";
+    audio.load();
+    audio.play();
+  }
+
+  abrirPorta() {
+    this.portaAberta = true
+    this.SomChegando()
+  }
 
 }
