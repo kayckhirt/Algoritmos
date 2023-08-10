@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="title">
+    <h1>Gerador de senhas</h1>
+    <p>Marque apenas os caracteres que você deseja na sua senha: </p>
+  </div>
+    <div *ngFor="let checkbox of checkboxes">
+      <label [for]="checkbox.label">{{ checkbox.label }}
+      <input type="checkbox" [id]="checkbox.label" [(ngModel)]="checkbox.checked">
+    </label>
+    </div>
+    <label for="">
+      Quantidade de Caracteres desejada:
+      <input type="text" placeholder="Quantidade Caracteres" [(ngModel)]="quantidadeCarac">
+    </label>
+    <button (click)="senhaGerada()">Gerar Senha</button>
+    <div *ngIf="senha.length > 0" class="font-site">SENHA: <span >{{senha}}</span></div>
+    <button (click)="copiarSenha()">Copiar para área de transferência</button>
+    <span *ngIf="copiado" class="sucess">Senha Copiada com Sucesso!</span>
+    <button (click)="forcaDaSenha()">Verifique a Força da sua senha:</button>
+    <span>{{senhaboa}}</span>
+</div>

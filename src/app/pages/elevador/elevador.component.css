@@ -1,0 +1,81 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+.predio {
+    width: 250px;
+    height: 700px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.andar {
+    width: 250px;
+    height: 173px;
+    border: 1px solid gray;
+}
+
+.elevador-nao-presente {
+    width: 250px;
+    height: 173px;
+    border: 2px solid rgb(73, 73, 73);
+    background-color:#7c7c7c;
+    font-size: 40px;
+}
+.elevador-presente {
+    width: 250px;
+    height: 173px;
+    border: 2px solid rgb(221, 220, 220);
+    background-color:rgb(179, 177, 177);
+    font-size: 40px;
+}
+.elevador-aberto {
+    width: 250px;
+    height: 173px;
+    border: 2px solid rgb(128, 128, 128);
+    background-color:#ddc247;
+    font-size: 40px;
+}
+.painel-elevador{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.botao-elevador{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 40px;
+    margin: 3px;
+}
+
+body{
+    display: flex;
+}
+.elevador-parado{
+    width:15px;
+    height:15px;
+    background:#ccc;
+    border-radius: 50%;
+}
+.elevador-vindo{
+    background:green;
+    border-radius: 50%;
+    width:15px;
+    height:15px;
+    box-shadow: 1px 1px 17px 2px yellow;
+}
+.seta {
+    width: 20px;
+    height: 20px;
+}
+.seta-para-cima {
+    width: 20px;
+    height: 20px;
+    transform: rotate(180deg);
+}

@@ -1,0 +1,38 @@
+<div class="container-pai">
+    <div class="container">
+        <div class="container">
+            <h1>CONVERSOR DE ALGARISMO ROMANO PARA DECIMAL</h1>
+        </div>
+        <div class="container">
+            <label>Digite o Algarísmo Romano:
+                <input type="text" name="algRomano" id="inputRomano" [(ngModel)]="algRomano" placeholder="I"
+                    class="fontRomano">
+            </label>
+            <p *ngIf="!verificaAlgRomano(algRomano)" class="erro">Por favor digite algorismos Romanos válidos.</p>
+        </div>
+        <button (click)="converter()">Converter</button>
+        <div class="resultado">
+            <p>Em Decimal é:
+                <span *ngIf="converter()" class="line">{{converter()}}
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
+            <h1>CONVERSOR DE DECIMAL PARA ALGARISMO ROMANO</h1>
+        </div>
+        <div class="container">
+            <label>Digite o Número para converter:
+                <input type="text" name="decimal" id="decimalInput" [(ngModel)]="decimal" class="fontRomano">
+            </label>
+            <p *ngIf="!verificarDecim(decimal)" class="erro">Por favor digite apenas números.</p>
+        </div>
+            <button (click)="converterDec()">Converter</button>
+        <div class="resultado">
+            <p>Em Algarísmo Romano é:
+                <span class="line">{{converterDec()}}</span>
+            </p>
+        </div>
+    </div>
+</div>

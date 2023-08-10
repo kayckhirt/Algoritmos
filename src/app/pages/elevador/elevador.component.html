@@ -1,0 +1,53 @@
+<body>
+    <div class="predio">
+        <div class="andar" [ngClass]="{
+            'elevador-presente': andarAtual === 4,
+            'elevador-nao-presente': andarAtual !== 4,
+            'elevador-aberto': andarAtual === 4 && portaAberta,
+            }">
+            <button (click)="chamarParaBaixo(4)">
+                <img src="/assets/seta.png" alt="" class="seta">
+            </button>
+        </div>
+        <div class="andar" [ngClass]="{
+            'elevador-presente': andarAtual === 3,
+            'elevador-nao-presente': andarAtual !== 3,
+            'elevador-aberto': andarAtual === 3 && portaAberta,
+            }">
+            <button (click)="chamarParaCima(3)">
+                <img src="/assets/seta.png" alt="" class="seta-para-cima">
+            </button>
+            <button (click)="chamarParaBaixo(3)">
+                <img src="/assets/seta.png" alt="" class="seta">
+            </button>
+        </div>
+        <div class="andar" [ngClass]="{
+            'elevador-presente': andarAtual === 2,
+            'elevador-nao-presente': andarAtual !== 2,
+            'elevador-aberto': andarAtual === 2 && portaAberta,
+            }">
+            <button (click)="chamarParaCima(2)">
+                <img src="/assets/seta.png" alt="" class="seta-para-cima">
+            </button>
+            <button (click)="chamarParaBaixo(2)">
+                <img src="/assets/seta.png" alt="" class="seta">
+            </button>
+        </div>
+        <div class="andar" [ngClass]="{
+            'elevador-presente': andarAtual === 1,
+            'elevador-nao-presente': andarAtual !== 1,
+            'elevador-aberto': andarAtual === 1 && portaAberta,
+            }">
+            <button (click)="chamarParaCima(1)">
+                <img src="/assets/seta.png" alt="" class="seta-para-cima">
+            </button>
+        </div>
+    </div>
+    <div class="painel-elevador" *ngIf="portaAberta">
+        <h1>Selecione o andar</h1>
+        <button class="botao-elevador" (click)="definirAndar(1)">1</button>
+        <button class="botao-elevador" (click)="definirAndar(2)">2</button>
+        <button class="botao-elevador" (click)="definirAndar(3)">3</button>
+        <button class="botao-elevador" (click)="definirAndar(4)">4</button>
+    </div>
+</body>

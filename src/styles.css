@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;700&family=Lora:ital,wght@0,400;1,500;1,600;1,700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.erro {
+    color: red;
+    font: bold;
+    text-align: center;
+}
+
+body {
+    background-color: rgba(237, 237, 237, 1);
+}
+
+.fontRomano {
+    font-family: 'Lora', serif;
+    height: 30px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+.font-site {
+    color:black;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
+label {
+    font-size: 25px;
+}
+
+.sucess {
+    color: green;
+}
