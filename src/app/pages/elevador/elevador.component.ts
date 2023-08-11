@@ -8,7 +8,7 @@ export class ElevadorComponent {
   andarAtual = 1;
   andarAlvo: number = 1;
   selecaoAndares: any = [];
-  portaAberta: boolean = false;
+  portaAberta: boolean = true;
   intervalo: any;
   constructor() {
     this.ligarElevador()
@@ -23,20 +23,19 @@ export class ElevadorComponent {
     this.intervalo = setInterval(() => {
       if (this.selecaoAndares.length === 0 && this.andarAtual !== 1) {
         this.andarAlvo = 1;
-        this.portaAberta =false;
+        this.portaAberta = false;
         this.ligarElevador();
       }
-    }, 16000);
+    }, 20000);
   }
 
 
   async ligarElevador() {
     let funcionando = true
     while (funcionando) {
-      console.log(`Andar atual: ${this.andarAtual};
-      Andar Alvo: ${this.andarAlvo}`)
       if (this.selecaoAndares.length === 0 && this.andarAtual === this.andarAlvo) {
         funcionando = false;
+        this.portaAberta = true;
         this.reset()
       } else {
         funcionando = true;
@@ -52,61 +51,60 @@ export class ElevadorComponent {
         this.selecaoAndares.length > 0) {
         this.andarAlvo = this.selecaoAndares.shift()
       }
+      if (this.andarAlvo === this.andarAtual) {
+        this.abrirPorta()
+      }
     }
-    this.abrirPorta()
   }
 
- chamarParaCima(andar: number): any {
-  if (this.andarAtual === andar) {
-    this.abrirPorta();
-    this.andarAtual = andar; 
-  }
-  if (this.selecaoAndares.length === 0) {
-    this.andarAlvo = andar;
-    return this.ligarElevador();
-  }
-  if (this.andarAlvo < andar) {
-    this.andarAlvo = andar;
-  } else {
-    this.selecaoAndares.push(andar);
-  }
-    if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
-      return this.ligarElevador()
+  chamarParaCima(andar: number): any {
+    if (this.andarAtual === andar) {
+      this.abrirPorta();
     }
+    else {
+      this.portaAberta = false;
+    }
+    if (andar) {
+      this.selecaoAndares.push(andar)
+      this.portaAberta = false
+    }
+    if (this.andarAlvo < andar) {
+      this.andarAlvo = andar;
+    } else {
+      this.selecaoAndares.push(andar);
+    }
+    return this.ligarElevador()
   }
 
   chamarParaBaixo(andar: number): any {
     if (this.andarAtual == andar) {
       this.abrirPorta()
     }
-    if (this.selecaoAndares.length === 0) {
+    else {
+      this.portaAberta = false;
+    }
+    if (andar) {
+      this.portaAberta = false
       this.selecaoAndares.push(andar);
-      this.andarAlvo = this.selecaoAndares[0];
-      return this.ligarElevador()
     }
     if (this.andarAlvo > andar) {
       this.andarAlvo = andar;
     } else {
       this.selecaoAndares.push(andar);
     }
-    if (this.selecaoAndares.length === 0 && this.andarAlvo == this.andarAtual) {
-      return this.ligarElevador()
-    }
+    return this.ligarElevador()
   }
 
   definirAndar(andar: number) {
     if (this.andarAtual === andar) {
+      this.abrirPorta()
     }
-    if (andar >= 1) {
-      if (this.selecaoAndares.length === 0) {
-        this.selecaoAndares.push(andar);
-        this.andarAlvo = this.selecaoAndares[0];
-        this.ligarElevador();
-        this.portaAberta = false;
-      } else {
-        this.selecaoAndares.push(andar);
-      }
-      console.log(`Andar definido para ${andar}`);
+    else {
+      this.portaAberta = false;
+    }
+    if (andar) {
+      this.portaAberta = false
+      this.selecaoAndares.push(andar);
     }
     this.ligarElevador()
   }

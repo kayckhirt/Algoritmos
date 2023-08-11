@@ -43,7 +43,9 @@
             </button>
         </div>
     </div>
-    <div class="painel-elevador" *ngIf="portaAberta">
+    <div class="painel-elevador" 
+    *ngIf="portaAberta"
+    >
         <h1>Selecione o andar</h1>
         <button class="botao-elevador" (click)="definirAndar(1)">1</button>
         <button class="botao-elevador" (click)="definirAndar(2)">2</button>
