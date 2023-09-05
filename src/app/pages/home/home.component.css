@@ -5,10 +5,18 @@ img {
 p {
     text-align: center;
 }
+.redes {
+    text-align: center;
+}
+.redes a {
+    color: #5da6b0;
+    font-weight: bold;
+}
 
 a {
     color: black;
     text-decoration: none;
+    margin: 10px;
 }
 
 header {
